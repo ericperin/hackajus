@@ -2,7 +2,11 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <label for="">QR Code</label>
-    <p class="decode-result">Last result: <b>{{ result }}</b></p>
+    <i class="fas fa-qrcode"></i>
+    <p>
+      <b>{{ result }}</b>
+    </p>
+    <i class="fas fa-barcode"></i>
 
     <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit">
       <div v-if="validationSuccess" class="validation-success">
@@ -21,15 +25,15 @@
 </template>
 
 <script>
-import { QrcodeStream } from 'vue-qrcode-reader'
+import { QrcodeStream } from "vue-qrcode-reader";
 export default {
   name: "HelloWorld",
-  data () {
+  data() {
     return {
       isValid: undefined,
-      camera: 'auto',
-      result: null,
-    }
+      camera: "auto",
+      result: null
+    };
   },
   props: {
     msg: String
@@ -38,17 +42,16 @@ export default {
     QrcodeStream
   },
   computed: {
-    validationPending () {
-      return this.isValid === undefined
-        && this.camera === 'off'
+    validationPending() {
+      return this.isValid === undefined && this.camera === "off";
     },
 
-    validationSuccess () {
-      return this.isValid === true
+    validationSuccess() {
+      return this.isValid === true;
     },
 
-    validationFailure () {
-      return this.isValid === false
+    validationFailure() {
+      return this.isValid === false;
     }
   },
   methods: {
@@ -72,42 +75,42 @@ export default {
     //   }
     // }
 
-    onInit (promise) {
+    onInit(promise) {
       promise
         // .catch(console.error)
-        .then(this.resetValidationState)
+        .then(this.resetValidationState);
     },
 
-    resetValidationState () {
-      this.isValid = undefined
+    resetValidationState() {
+      this.isValid = undefined;
     },
 
-    async onDecode (content) {
-      this.result = content
-      this.turnCameraOff()
+    async onDecode(content) {
+      this.result = content;
+      this.turnCameraOff();
 
       // pretend it's taking really long
-      await this.timeout(500)
-      this.isValid = content.startsWith('http')
+      await this.timeout(500);
+      this.isValid = content.startsWith("http");
 
       // some more delay, so users have time to read the message
-      await this.timeout(2000)
+      await this.timeout(2000);
 
-      this.turnCameraOn()
+      this.turnCameraOn();
     },
 
-    turnCameraOn () {
-      this.camera = 'auto'
+    turnCameraOn() {
+      this.camera = "auto";
     },
 
-    turnCameraOff () {
-      this.camera = 'off'
+    turnCameraOff() {
+      this.camera = "off";
     },
 
-    timeout (ms) {
+    timeout(ms) {
       return new Promise(resolve => {
-        window.setTimeout(resolve, ms)
-      })
+        window.setTimeout(resolve, ms);
+      });
     }
   }
 };
@@ -122,7 +125,7 @@ export default {
   width: 100%;
   height: 100%;
 
-  background-color: rgba(255, 255, 255, .8);
+  background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-weight: bold;
   font-size: 1.4rem;
