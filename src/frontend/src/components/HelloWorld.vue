@@ -2,9 +2,21 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <label for="">QR Code</label>
-    <p class="error">{{ error }}</p>
     <p class="decode-result">Last result: <b>{{ result }}</b></p>
-    <qrcode-stream @decode="onDecode" @init="onInit" />
+
+    <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit">
+      <div v-if="validationSuccess" class="validation-success">
+        Código válido
+      </div>
+
+      <div v-if="validationFailure" class="validation-failure">
+        Código inválido
+      </div>
+
+      <div v-if="validationPending" class="validation-pending">
+        Carregando...
+      </div>
+    </qrcode-stream>
   </div>
 </template>
 
@@ -14,8 +26,9 @@ export default {
   name: "HelloWorld",
   data () {
     return {
-      result: '',
-      error: ''
+      isValid: undefined,
+      camera: 'auto',
+      result: null,
     }
   },
   props: {
@@ -24,29 +37,77 @@ export default {
   components: {
     QrcodeStream
   },
-  methods: {
-    onDecode (result) {
-      this.result = result
+  computed: {
+    validationPending () {
+      return this.isValid === undefined
+        && this.camera === 'off'
     },
 
-    async onInit (promise) {
-      try {
-        await promise
-      } catch (error) {
-        if (error.name === 'NotAllowedError') {
-          this.error = "ERROR: you need to grant camera access permisson"
-        } else if (error.name === 'NotFoundError') {
-          this.error = "ERROR: no camera on this device"
-        } else if (error.name === 'NotSupportedError') {
-          this.error = "ERROR: secure context required (HTTPS, localhost)"
-        } else if (error.name === 'NotReadableError') {
-          this.error = "ERROR: is the camera already in use?"
-        } else if (error.name === 'OverconstrainedError') {
-          this.error = "ERROR: installed cameras are not suitable"
-        } else if (error.name === 'StreamApiNotSupportedError') {
-          this.error = "ERROR: Stream API is not supported in this browser"
-        }
-      }
+    validationSuccess () {
+      return this.isValid === true
+    },
+
+    validationFailure () {
+      return this.isValid === false
+    }
+  },
+  methods: {
+    // async onInit (promise) {
+    //   try {
+    //     await promise
+    //   } catch (error) {
+    //     if (error.name === 'NotAllowedError') {
+    //       this.error = "ERROR: you need to grant camera access permisson"
+    //     } else if (error.name === 'NotFoundError') {
+    //       this.error = "ERROR: no camera on this device"
+    //     } else if (error.name === 'NotSupportedError') {
+    //       this.error = "ERROR: secure context required (HTTPS, localhost)"
+    //     } else if (error.name === 'NotReadableError') {
+    //       this.error = "ERROR: is the camera already in use?"
+    //     } else if (error.name === 'OverconstrainedError') {
+    //       this.error = "ERROR: installed cameras are not suitable"
+    //     } else if (error.name === 'StreamApiNotSupportedError') {
+    //       this.error = "ERROR: Stream API is not supported in this browser"
+    //     }
+    //   }
+    // }
+
+    onInit (promise) {
+      promise
+        // .catch(console.error)
+        .then(this.resetValidationState)
+    },
+
+    resetValidationState () {
+      this.isValid = undefined
+    },
+
+    async onDecode (content) {
+      this.result = content
+      this.turnCameraOff()
+
+      // pretend it's taking really long
+      await this.timeout(500)
+      this.isValid = content.startsWith('http')
+
+      // some more delay, so users have time to read the message
+      await this.timeout(2000)
+
+      this.turnCameraOn()
+    },
+
+    turnCameraOn () {
+      this.camera = 'auto'
+    },
+
+    turnCameraOff () {
+      this.camera = 'off'
+    },
+
+    timeout (ms) {
+      return new Promise(resolve => {
+        window.setTimeout(resolve, ms)
+      })
     }
   }
 };
