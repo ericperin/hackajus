@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <img alt="TJ-RO" src="./assets/tjro.png">
+    <div class="row">
+      <div class="form-group col-md-12">
+    <img alt="TJ-RO" src="./assets/tjro.png" class="img-responsive">
+
+      </div>
+    </div>
     <HelloWorld msg="HACKAJUS"/>
   </div>
 </template>
