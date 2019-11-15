@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="https://www.tjro.jus.br/templates/tjro_portal_responsivo/images/presets/tjro/logo.png">
+    <img alt="TJ-RO" src="./assets/tjro.png">
     <HelloWorld msg="HACKAJUS"/>
   </div>
 </template>
