@@ -103,16 +103,13 @@ export default {
             inputAttributes: {
               id: "cpf"
             },
+          },
+          {
+            title: "Informações da Nota Fiscal",
+            text: "Digite ou leia o qr code da NF",
             showLoaderOnConfirm: true,
             preConfirm: () => {
-              return fetch("//api.ipify.org?format=json")
-                .then(response => response.json())
-                .then(data => {
-                  this.$swal.insertQueueStep({
-                    title: "Informações da Nota Fiscal",
-                    text: `Digite ou leia o qr code da NF`
-                  });
-                })
+              return fetch("//hackajus.herokuapp.com/processo/new?format=json")
                 .catch(() => {
                   this.$swal.insertQueueStep({
                     icon: "error",
