@@ -16,7 +16,7 @@
     <meta name="robots" content="noindex,nofollow,noarchive"/>
     <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
-    <title>Dashboard - Tabler Admin Template - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>PJE - Solicitações</title>
     <!-- Libs CSS -->
     <link href="https://preview-dev.tabler.io/dist/libs/jqvmap/dist/jqvmap.min.css?1573025067" rel="stylesheet" />
     <link href="https://preview-dev.tabler.io/dist/libs/selectize/dist/css/selectize.css?1573025067" rel="stylesheet" />
@@ -38,13 +38,13 @@
    class="antialiased ">
     <div class="layout d-flex flex-row vh-100">
       <div class="layout-main d-flex flex-column flex-fill max-w-full">
-        <header class="navbar navbar-expand-lg navbar-light pje-color">
+        <header class="navbar navbar-expand-lg navbar-light pje-color" style="background-color: #0078AA;">
           <div class="container">
             <a class="navbar-toggler" data-toggle="modal" data-target="#aside">
               <span class="navbar-toggler-icon"></span>
             </a>
             <a href="." class="navbar-brand text-reset mr-md-3">
-              <img src="imgs/pje2-branco.png" alt="Tabler Admin Template" class="d-none d-md-block navbar-brand-logo">
+              <img src="img/pje-logo.png" alt="PJe logo" class="d-none d-md-block navbar-brand-logo">
               <img src="https://preview-dev.tabler.io/img/logo-small.svg" alt="Tabler Admin Template" class="d-md-none navbar-brand-logo">
             </a>
             <ul class="nav navbar-menu align-items-center order-1 order-lg-2">
@@ -112,11 +112,8 @@
         </header>
         <main class="container my-4 flex-fill">
           <!-- Page title -->
-          <div class="page-title-box">
-            <div class="row align-items-center">
-              <!-- Page title actions -->
-             
-            
+          <h1 class="display-4">Painel de solicitações</h1>
+          <span class="text-muted">Solicitações de medicamento ou serviços clinicos</span>
           <div class="row row-deck">
             <div class="col-12">
               <div class="card">
@@ -129,175 +126,76 @@
                       <tr>
                         <th class="w-1p"><input class="form-check-input m-0 align-middle" type="checkbox"></th>
                         <th class="w-1p">N°</th>
-                        <th>Processo</th>
-                        <th>Medicamento</th>
-                        <th>Paciente</th>
-                        <th>Enviado</th>
-                        <th>Deferido?</th>
-                        <th>Custos</th>
-                        <th></th>
+                        <th>Item</th>
+                        <th>Valor (R$)</th>
+                        <th>Situação</th>
+                        <th class="text-center"><i class="fe fe-settings"></i> ação</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr class="bg-yellow-lightest">
                         <td><input class="form-check-input m-0 align-middle" type="checkbox"></td>
-                        <td><span class="text-muted">001401</span></td>
-                        <td><a href="invoice.html" class="text-reset">Design Works</a></td>
                         <td>
-                          <span class="flag flag-us"></span>
-                          Carlson Limited
+                          <span class="text-muted">001401</span><br>
+                          <span class="small">Solicitação de medicamento</span>
                         </td>
                         <td>
-                          87956621
+			  <div class="d-flex align-items-center">
+                            <img src="http://s2.glbimg.com/MaKAJELvKA3GvDeEznyMJOhFvNI=/300x225/s.glbimg.com/jo/g1/f/original/2014/01/16/foto_4.jpg" alt="" height="40">
+			    <div class="ml-2">
+			      <div>
+				<strong>Sutent 50mg c/ 28 Cápsulas</strong>
+			      </div>
+			      <div class="text-muted text-h5">SUTENT CAPS 50MG C/28 MALATO DE SUNITINIBE 50mg cx 28 cap.</div>
+			    </div>
+			  </div>
                         </td>
-                        <td>
-                          15 Dec 2017
-                        </td>
-                        <td>
-                          <span class="status-icon bg-success"></span> Paid
-                        </td>
-                        <td>$887</td>
-                        <td class="text-right">
-                          <span class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
-                                Action
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                Another action
-                              </a>
-                            </div>
-                          </span>
+                        <td>R$ 20.000,00</td>
+                        <td class="status-animated"><span class="status-animated">Solicitação em aberto</span></td>
+                        <td class="text-center">
+                          <button class="btn btn-sm btn-success">Aprovar solicitação</button>
+                          <button class="btn btn-sm btn-warning">Analisar</button>
                         </td>
                       </tr>
                       <tr>
                         <td><input class="form-check-input m-0 align-middle" type="checkbox"></td>
-                        <td><span class="text-muted">001402</span></td>
-                        <td><a href="invoice.html" class="text-reset">UX Wireframes</a></td>
                         <td>
-                          <span class="flag flag-gb"></span>
-                          Adobe
+                          <span class="text-muted">001401</span><br>
+                          <span class="small">Solicitação de medicamento</span>
                         </td>
                         <td>
-                          87956421
+			  <div class="d-flex align-items-center">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ6Jl-t13xS_t5v_ZcRuZGAj0iZvD4_jU4Hp0qwvWq__JyxJIj&s" alt="" height="40">
+			    <div class="ml-2">
+			      <div>
+				<strong>Tarfic® 1 mg contém 1 mg de tacrolimo </strong>
+			      </div>
+			      <div class="text-muted text-h5">Hipromelose, croscarmelose, lactose e estearato de magnésio.</div>
+			    </div>
+			  </div>
                         </td>
-                        <td>
-                          12 Apr 2017
-                        </td>
-                        <td>
-                          <span class="status-icon bg-warning"></span> Pending
-                        </td>
-                        <td>$1200</td>
-                        <td class="text-right">
-                          <span class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
-                                Action
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                Another action
-                              </a>
-                            </div>
-                          </span>
-                        </td>
+                        <td>R$ 20.000,00</td>
+                        <td class="text-center text-success" colspan="2"><strong>Aprovado</span></td>
                       </tr>
                       <tr>
                         <td><input class="form-check-input m-0 align-middle" type="checkbox"></td>
-                        <td><span class="text-muted">001403</span></td>
-                        <td><a href="invoice.html" class="text-reset">New Dashboard</a></td>
                         <td>
-                          <span class="flag flag-de"></span>
-                          Bluewolf
+                          <span class="text-muted">001401</span><br>
+                          <span class="small">Solicitação de medicamento</span>
                         </td>
                         <td>
-                          87952621
+			  <div class="d-flex align-items-center">
+                            <img src="http://s2.glbimg.com/MaKAJELvKA3GvDeEznyMJOhFvNI=/300x225/s.glbimg.com/jo/g1/f/original/2014/01/16/foto_4.jpg" alt="" height="40">
+			    <div class="ml-2">
+			      <div>
+				<strong>Atenolol 25mg 30 Comprimidos Medley Genérico C</strong>
+			      </div>
+			      <div class="text-muted text-h5">ATENOLOL 50MG GENÉRICO CIMED 30 COMPRIMIDOS</div>
+			    </div>
+			  </div>
                         </td>
-                        <td>
-                          23 Oct 2017
-                        </td>
-                        <td>
-                          <span class="status-icon bg-warning"></span> Pending
-                        </td>
-                        <td>$534</td>
-                        <td class="text-right">
-                          <span class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
-                                Action
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                Another action
-                              </a>
-                            </div>
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><input class="form-check-input m-0 align-middle" type="checkbox"></td>
-                        <td><span class="text-muted">001404</span></td>
-                        <td><a href="invoice.html" class="text-reset">Landing Page</a></td>
-                        <td>
-                          <span class="flag flag-br"></span>
-                          Salesforce
-                        </td>
-                        <td>
-                          87953421
-                        </td>
-                        <td>
-                          2 Sep 2017
-                        </td>
-                        <td>
-                          <span class="status-icon bg-secondary"></span> Due in 2 Weeks
-                        </td>
-                        <td>$1500</td>
-                        <td class="text-right">
-                          <span class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
-                                Action
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                Another action
-                              </a>
-                            </div>
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><input class="form-check-input m-0 align-middle" type="checkbox"></td>
-                        <td><span class="text-muted">001405</span></td>
-                        <td><a href="invoice.html" class="text-reset">Marketing Templates</a></td>
-                        <td>
-                          <span class="flag flag-pl"></span>
-                          Printic
-                        </td>
-                        <td>
-                          87956621
-                        </td>
-                        <td>
-                          29 Jan 2018
-                        </td>
-                        <td>
-                          <span class="status-icon bg-danger"></span> Paid Today
-                        </td>
-                        <td>$648</td>
-                        <td class="text-right">
-                          <span class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Actions</button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">
-                                Action
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                Another action
-                              </a>
-                            </div>
-                          </span>
-                        </td>
+                        <td>R$ 20.000,00</td>
+                        <td class="text-center text-success" colspan="2"><strong>Aprovado</span></td>
                       </tr>
                     </tbody>
                   </table>
@@ -457,8 +355,8 @@
       };
     </script>
     <!-- Libs JS -->
-    <script src="./dist/libs/jquery/dist/jquery.min.js?1573025067"></script>
-    <script src="./dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js?1573025067"></script>
+    <script src="https://preview-dev.tabler.io/dist/libs/jquery/dist/jquery.min.js?1573025067"></script>
+    <script src="https://preview-dev.tabler.io/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js?1573025067"></script>
     <script src="./dist/libs/autosize/dist/autosize.min.js?1573025067"></script>
     <script src="./dist/libs/imask/dist/imask.min.js?1573025067"></script>
     <script src="./dist/libs/selectize/dist/js/standalone/selectize.min.js?1573025067"></script>
@@ -475,7 +373,7 @@
     <script src="./dist/libs/fullcalendar/timegrid/main.min.js?1573025067"></script>
     <script src="./dist/libs/fullcalendar/list/main.min.js?1573025067"></script>
     <!-- Tabler Core -->
-    <script src="./dist/js/tabler.min.js?1573025067"></script>
+    <script src="https://preview-dev.tabler.io/dist/js/tabler.min.js?1573025067"></script>
     <!-- Tabler Plugins -->
     <script src="./dist/js/tabler-charts.min.js?1573025067"></script>
     <script>
