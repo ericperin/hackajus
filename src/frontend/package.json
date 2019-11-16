@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "core-js": "^3.3.2",
+    "jquery": "^3.4.1",
+    "jquery-mask-plugin": "^1.14.16",
     "vue": "^2.6.10",
-    "vue-qrcode-reader": "^2.1.1"
+    "vue-qrcode-reader": "^2.1.1",
+    "vue-sweetalert2": "^2.1.5"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",

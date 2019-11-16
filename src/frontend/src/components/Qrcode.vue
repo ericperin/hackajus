@@ -63,6 +63,7 @@ export default {
   },
   computed: {
     validationPending() {
+      window.$('.swal2-input').mask('000.000.000-00');
       return this.isValid === undefined && this.camera === "off";
     },
 
@@ -75,30 +76,52 @@ export default {
     }
   },
   methods: {
-    // async onInit (promise) {
-    //   try {
-    //     await promise
-    //   } catch (error) {
-    //     if (error.name === 'NotAllowedError') {
-    //       this.error = "ERROR: you need to grant camera access permisson"
-    //     } else if (error.name === 'NotFoundError') {
-    //       this.error = "ERROR: no camera on this device"
-    //     } else if (error.name === 'NotSupportedError') {
-    //       this.error = "ERROR: secure context required (HTTPS, localhost)"
-    //     } else if (error.name === 'NotReadableError') {
-    //       this.error = "ERROR: is the camera already in use?"
-    //     } else if (error.name === 'OverconstrainedError') {
-    //       this.error = "ERROR: installed cameras are not suitable"
-    //     } else if (error.name === 'StreamApiNotSupportedError') {
-    //       this.error = "ERROR: Stream API is not supported in this browser"
-    //     }
-    //   }
-    // }
+    showAlert() {
+      this.$swal
+        .mixin({
+          input: "text",
+          confirmButtonText: "Próximo",
+          showCancelButton: false,
+          progressSteps: ["1", "2"]
+        })
+        .queue([
+          {
+            title: "Informações do usuário",
+            text: "Digite o CPF"
+          },
+          {
+            title: "Informações da Nota Fiscal",
+            text: "Digite ou leia o qr code da NF"
+          }
+        ])
+        .then(result => {
+          if (result.value) {
+            const answers = JSON.stringify(result.value);
+            this.$swal.fire(
+              "Informações enviadas com sucesso!",
+              `${answers}`,
+              "success"
+            );
+          }
+        });
+    },
 
     onInit(promise) {
-      promise
-        // .catch(console.error)
-        .then(this.resetValidationState);
+      promise.then(this.resetValidationState).catch(function(error) {
+        if (error.name === "NotAllowedError") {
+          this.error = "ERROR: you need to grant camera access permisson";
+        } else if (error.name === "NotFoundError") {
+          this.error = "ERROR: no camera on this device";
+        } else if (error.name === "NotSupportedError") {
+          this.error = "ERROR: secure context required (HTTPS, localhost)";
+        } else if (error.name === "NotReadableError") {
+          this.error = "ERROR: is the camera already in use?";
+        } else if (error.name === "OverconstrainedError") {
+          this.error = "ERROR: installed cameras are not suitable";
+        } else if (error.name === "StreamApiNotSupportedError") {
+          this.error = "ERROR: Stream API is not supported in this browser";
+        }
+      });
     },
 
     resetValidationState() {
@@ -111,7 +134,10 @@ export default {
 
       // pretend it's taking really long
       await this.timeout(500);
-      this.isValid = content.startsWith("R4");
+      // this.isValid = content.startsWith("R4");
+      if (content.startsWith("R4")) {
+        this.showAlert();
+      }
 
       // some more delay, so users have time to read the message
       await this.timeout(2000);
