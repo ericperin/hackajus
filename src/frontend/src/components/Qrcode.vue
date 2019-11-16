@@ -115,11 +115,7 @@ export default {
         .then(result => {
           if (result.value) {
             const answers = JSON.stringify(result.value);
-            this.$swal.fire(
-              "Informações enviadas com sucesso!",
-              `${answers}`,
-              "success"
-            );
+            this.$swal.fire("Parabéns!", "Confirmação de compra enviada com sucesso!", "success");
           }
         });
     },
