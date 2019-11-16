@@ -63,6 +63,7 @@ export default {
   },
   computed: {
     validationPending() {
+      window.$('.swal2-input').mask('000.000.000-00');
       return this.isValid === undefined && this.camera === "off";
     },
 
