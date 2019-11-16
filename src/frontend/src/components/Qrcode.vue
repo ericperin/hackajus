@@ -79,8 +79,8 @@ export default {
       this.$swal
         .mixin({
           input: "text",
-          confirmButtonText: "Next &rarr;",
-          showCancelButton: true,
+          confirmButtonText: "Próximo",
+          showCancelButton: false,
           progressSteps: ["1", "2"]
         })
         .queue([
@@ -96,41 +96,31 @@ export default {
         .then(result => {
           if (result.value) {
             const answers = JSON.stringify(result.value);
-            this.$swal.fire({
-              title: "All done!",
-              html: `
-        Your answers:
-        <pre><code>${answers}</code></pre>
-      `,
-              confirmButtonText: "Lovely!"
-            });
+            this.$swal.fire(
+              "Informações enviadas com sucesso!",
+              `${answers}`,
+              "success"
+            );
           }
         });
     },
-    // async onInit (promise) {
-    //   try {
-    //     await promise
-    //   } catch (error) {
-    //     if (error.name === 'NotAllowedError') {
-    //       this.error = "ERROR: you need to grant camera access permisson"
-    //     } else if (error.name === 'NotFoundError') {
-    //       this.error = "ERROR: no camera on this device"
-    //     } else if (error.name === 'NotSupportedError') {
-    //       this.error = "ERROR: secure context required (HTTPS, localhost)"
-    //     } else if (error.name === 'NotReadableError') {
-    //       this.error = "ERROR: is the camera already in use?"
-    //     } else if (error.name === 'OverconstrainedError') {
-    //       this.error = "ERROR: installed cameras are not suitable"
-    //     } else if (error.name === 'StreamApiNotSupportedError') {
-    //       this.error = "ERROR: Stream API is not supported in this browser"
-    //     }
-    //   }
-    // }
 
     onInit(promise) {
-      promise
-        // .catch(console.error)
-        .then(this.resetValidationState);
+      promise.then(this.resetValidationState).catch(function(error) {
+        if (error.name === "NotAllowedError") {
+          this.error = "ERROR: you need to grant camera access permisson";
+        } else if (error.name === "NotFoundError") {
+          this.error = "ERROR: no camera on this device";
+        } else if (error.name === "NotSupportedError") {
+          this.error = "ERROR: secure context required (HTTPS, localhost)";
+        } else if (error.name === "NotReadableError") {
+          this.error = "ERROR: is the camera already in use?";
+        } else if (error.name === "OverconstrainedError") {
+          this.error = "ERROR: installed cameras are not suitable";
+        } else if (error.name === "StreamApiNotSupportedError") {
+          this.error = "ERROR: Stream API is not supported in this browser";
+        }
+      });
     },
 
     resetValidationState() {
