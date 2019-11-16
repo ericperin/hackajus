@@ -76,36 +76,36 @@ export default {
   },
   methods: {
     showAlert() {
-      // Use sweetalertnp2
-      this.$swal("Hello Vue world!!!");
-
-      // this.$swal({
-      //   input: "text",
-      //   confirmButtonText: "Next &rarr;",
-      //   showCancelButton: true,
-      //   progressSteps: ["1", "2", "3"]
-      // })
-      //   .queue([
-      //     {
-      //       title: "Question 1",
-      //       text: "Chaining swal2 modals is easy"
-      //     },
-      //     "Question 2",
-      //     "Question 3"
-      //   ])
-      //   .then(result => {
-      //     if (result.value) {
-      //       const answers = JSON.stringify(result.value);
-      //       Swal.fire({
-      //         title: "All done!",
-      //         html: `
-      //   Your answers:
-      //   <pre><code>${answers}</code></pre>
-      // `,
-      //         confirmButtonText: "Lovely!"
-      //       });
-      //     }
-      //   });
+      this.$swal
+        .mixin({
+          input: "text",
+          confirmButtonText: "Next &rarr;",
+          showCancelButton: true,
+          progressSteps: ["1", "2"]
+        })
+        .queue([
+          {
+            title: "Informações do usuário",
+            text: "Digite o CPF"
+          },
+          {
+            title: "Informações da Nota Fiscal",
+            text: "Digite ou leia o qr code da NF"
+          }
+        ])
+        .then(result => {
+          if (result.value) {
+            const answers = JSON.stringify(result.value);
+            this.$swal.fire({
+              title: "All done!",
+              html: `
+        Your answers:
+        <pre><code>${answers}</code></pre>
+      `,
+              confirmButtonText: "Lovely!"
+            });
+          }
+        });
     },
     // async onInit (promise) {
     //   try {
