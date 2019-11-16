@@ -2,6 +2,11 @@
   <div class="hello">
     <h1>Recebimento via QR Code</h1>
 
+    <p style="font-size: 30px">
+      Valide o documento disponibilizado pelo cliente escaneando o QR CODE ou
+      informando o código manualmente no campo abaixo.
+    </p>
+
     <div class="row justify-content-center">
       <div class="form-group col-md-4">
         <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit">
@@ -37,6 +42,14 @@
             placeholder="Código de barras"
           />
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12" style="font-size: 20px">
+        Quanto mais rápido ocorrer o envio das notas fiscais, mais ágil será o
+        repasse de verbas.<br/>
+        Em caso de dúvidas entre em contato através do
+        e-mail: hackjus@tjro.jus.br ou pelo telefone: (69) 3216-1616.
       </div>
     </div>
   </div>
@@ -112,7 +125,11 @@ export default {
         .then(result => {
           if (result.value) {
             const answers = JSON.stringify(result.value);
-            this.$swal.fire("Parabéns!", "Confirmação de compra enviada com sucesso!", "success");
+            this.$swal.fire(
+              "Parabéns!",
+              "Confirmação de compra enviada com sucesso!",
+              "success"
+            );
           }
         });
     },
@@ -148,7 +165,7 @@ export default {
       // pretend it's taking really long
       await this.timeout(500);
       // this.isValid = content.startsWith("R4");
-      if (content === "R4YD4X7KQ7") {
+      if (true) {
         this.isValid = true;
         this.showAlert(content);
       } else {
