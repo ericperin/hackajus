@@ -13,6 +13,10 @@ def index():
 @app.route('/admin')
 def admin():
   return render_template('backend/index.html')
+
+@app.route('/processo')
+def main():
+  return render_template('backend/processo.html')
   
 if __name__ == '__main__':
   port = int(os.environ.get("PORT", 5000))
