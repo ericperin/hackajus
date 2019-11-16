@@ -380,5 +380,19 @@
     <script>
       document.body.style.display = 'block';
     </script>
+    <script>
+        $.getJSON('/processo/status', function(result){ 
+          var atual = result;
+          setInterval(function() {
+            $.getJSON('/processo/status', function(result){
+              console.log(result)
+                if(atual != result){
+                  window.location.reload();
+                }
+                atual = result;
+            });
+          });
+    }, 1000);
+    </script>
   </body>
 </html>

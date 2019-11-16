@@ -16,6 +16,7 @@ def index():
 
 @app.route('/admin')
 def admin():
+  global data
   return render_template('backend/index.html', data = data)
 
 @app.route('/processo')
@@ -33,6 +34,11 @@ def reset():
   global data
   data = 0
   return ''
+
+@app.route('/processo/status', methods=["GET"])
+def status():
+  global data
+  return str(data)
 
 if __name__ == '__main__':
   port = int(os.environ.get("PORT", 5000))
