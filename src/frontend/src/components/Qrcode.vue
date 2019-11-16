@@ -23,7 +23,7 @@
     <h2>ou</h2>
 
     <div class="row justify-content-center">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <div class="input-group input-group-lg flex-nowrap">
           <div class="input-group-prepend">
             <span class="input-group-text" id="addon-wrapping"
@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     validationPending() {
-      window.$(".swal2-input").mask("000.000.000-00");
+      window.$("#cpf").mask("000.000.000-00");
       return this.isValid === undefined && this.camera === "off";
     },
 
@@ -78,7 +78,7 @@ export default {
     }
   },
   methods: {
-    showAlert() {
+    showAlert(code) {
       this.$swal
         .mixin({
           input: "text",
@@ -90,6 +90,9 @@ export default {
           {
             title: "Informações do usuário",
             text: "Digite o CPF",
+            inputAttributes: {
+              id: "cpf"
+            },
             showLoaderOnConfirm: true,
             preConfirm: () => {
               return fetch("//api.ipify.org?format=json")
@@ -97,13 +100,13 @@ export default {
                 .then(data => {
                   this.$swal.insertQueueStep({
                     title: "Informações da Nota Fiscal",
-                    text: `Digite ou leia o qr code da NF ${data.ip}`
+                    text: `Digite ou leia o qr code da NF ${code}`
                   });
                 })
                 .catch(() => {
                   this.$swal.insertQueueStep({
                     icon: "error",
-                    title: "Ops! Aconteceu algo inesperado."
+                    title: "Ops! Algo inesperado aconteceu."
                   });
                 });
             }
@@ -152,8 +155,11 @@ export default {
       // pretend it's taking really long
       await this.timeout(500);
       // this.isValid = content.startsWith("R4");
-      if (content.startsWith("R4")) {
-        this.showAlert();
+      if (content === "R4YD4X7KQ7") {
+        this.isValid = true;
+        this.showAlert(content);
+      } else {
+        this.isValid = false;
       }
 
       // some more delay, so users have time to read the message
