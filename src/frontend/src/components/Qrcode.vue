@@ -89,11 +89,24 @@ export default {
         .queue([
           {
             title: "Informações do usuário",
-            text: "Digite o CPF"
-          },
-          {
-            title: "Informações da Nota Fiscal",
-            text: "Digite ou leia o qr code da NF"
+            text: "Digite o CPF",
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+              return fetch("//api.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                  this.$swal.insertQueueStep({
+                    title: "Informações da Nota Fiscal",
+                    text: `Digite ou leia o qr code da NF ${data.ip}`
+                  });
+                })
+                .catch(() => {
+                  this.$swal.insertQueueStep({
+                    icon: "error",
+                    title: "Ops! Aconteceu algo inesperado."
+                  });
+                });
+            }
           }
         ])
         .then(result => {
