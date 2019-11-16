@@ -39,9 +39,6 @@
         </div>
       </div>
     </div>
-    <p>
-      <b>{{ result }}</b>
-    </p>
   </div>
 </template>
 
@@ -100,7 +97,7 @@ export default {
                 .then(data => {
                   this.$swal.insertQueueStep({
                     title: "Informações da Nota Fiscal",
-                    text: `Digite ou leia o qr code da NF ${code}`
+                    text: `Digite ou leia o qr code da NF`
                   });
                 })
                 .catch(() => {
