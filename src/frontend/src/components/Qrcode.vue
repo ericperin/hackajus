@@ -1,42 +1,43 @@
 <template>
   <div class="hello">
-    <!-- <h1>{{ msg }}</h1> -->
     <h1>Recebimento via QR Code</h1>
 
-    <!-- <button type="button" class="btn btn-default btn-block">
-      <i class="fas fa-qrcode fa-9x"></i>
-    </button> -->
+    <div class="row justify-content-center">
+      <div class="form-group col-md-4">
+        <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit">
+          <div v-if="validationSuccess" class="validation-success">
+            Código válido
+          </div>
 
-    <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit">
-      <div v-if="validationSuccess" class="validation-success">
-        Código válido
-      </div>
+          <div v-if="validationFailure" class="validation-failure">
+            Código inválido
+          </div>
 
-      <div v-if="validationFailure" class="validation-failure">
-        Código inválido
+          <div v-if="validationPending" class="validation-pending">
+            Carregando...
+          </div>
+        </qrcode-stream>
       </div>
-
-      <div v-if="validationPending" class="validation-pending">
-        Carregando...
-      </div>
-    </qrcode-stream>
+    </div>
 
     <h2>ou</h2>
-    <div class="row">
-      <div class="input-group input-group-lg flex-nowrap">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="addon-wrapping"
-            ><i class="fas fa-barcode"></i
-          ></span>
+
+    <div class="row justify-content-center">
+      <div class="form-group col-md-6">
+        <div class="input-group input-group-lg flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping"
+              ><i class="fas fa-barcode"></i
+            ></span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            name="code"
+            placeholder="Código de barras"
+          />
         </div>
-        <input
-          type="text"
-          class="form-control"
-          name="code"
-          placeholder="Código de barras"
-        />
       </div>
-      <div class="form-group col-md-12"></div>
     </div>
     <p>
       <b>{{ result }}</b>
@@ -52,7 +53,8 @@ export default {
     return {
       isValid: undefined,
       camera: "auto",
-      result: null
+      result: null,
+      error: ""
     };
   },
   props: {
@@ -63,7 +65,7 @@ export default {
   },
   computed: {
     validationPending() {
-      window.$('.swal2-input').mask('000.000.000-00');
+      window.$(".swal2-input").mask("000.000.000-00");
       return this.isValid === undefined && this.camera === "off";
     },
 
@@ -108,19 +110,21 @@ export default {
 
     onInit(promise) {
       promise.then(this.resetValidationState).catch(function(error) {
+        let msg = "Ops!";
         if (error.name === "NotAllowedError") {
-          this.error = "ERROR: you need to grant camera access permisson";
+          msg = "Você precisar dar permissão de acesso a sua câmera";
         } else if (error.name === "NotFoundError") {
-          this.error = "ERROR: no camera on this device";
+          msg = "Nenhuma cãmera encontrada";
         } else if (error.name === "NotSupportedError") {
-          this.error = "ERROR: secure context required (HTTPS, localhost)";
+          msg = "Segurança é obrigatória (HTTPS, localhost)";
         } else if (error.name === "NotReadableError") {
-          this.error = "ERROR: is the camera already in use?";
+          msg = "A câmera já esta em uso?";
         } else if (error.name === "OverconstrainedError") {
-          this.error = "ERROR: installed cameras are not suitable";
+          msg = "Câmera instala não esta adequada corretamente";
         } else if (error.name === "StreamApiNotSupportedError") {
-          this.error = "ERROR: Stream API is not supported in this browser";
+          msg = "Stream API não tem suporte neste browser";
         }
+        alert(msg);
       });
     },
 
